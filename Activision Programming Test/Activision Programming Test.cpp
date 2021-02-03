@@ -18,7 +18,7 @@
 // If a word is shorter than the number of wheels it will shift along the lock and test again
 // until the last character of the word is aligned with the last wheel of the lock.
 //
-// I believe this solution has complexity ~O(n*log(m)) where n is the word count and m is the wheel count.
+// I believe this solution has complexity ~O(n*m) where n is the word count and m is the wheel count.
 // The number of letters on each wheel has no significant effect.
 
 #define ALPHABETLENGTH 26
@@ -76,7 +76,7 @@ void ReadWheelFile(bool**& wheels, char*& letters, uint& wheelCount, uint& lette
 		throw std::exception("ERROR: Invalid value for wheel count in wheels.txt. Expecting number greater than 0.");
 
 	wheels = new bool* [wheelCount];
-	for (int i = 0; i < wheelCount; ++i)
+	for (size_t i = 0; i < wheelCount; ++i)
 		wheels[i] = new bool[ALPHABETLENGTH] { false };
 
 
@@ -115,7 +115,7 @@ void ReadWheelFile(bool**& wheels, char*& letters, uint& wheelCount, uint& lette
 }
 
 // Reads in the dictionary file and tests each word against the lock.
-int ProcessDictionary(bool**& wheels,const uint wheelCount,const uint lettersPerWheel)
+void ProcessDictionary(bool**& wheels,const uint wheelCount,const uint lettersPerWheel)
 {
 	// Leave one space for terminating character.
 	char word[MAXWORDLENGTH + 1] {'\0'};
@@ -140,7 +140,7 @@ int ProcessDictionary(bool**& wheels,const uint wheelCount,const uint lettersPer
 		// Convert the word to lower case, and check that only
 		// alphabetical characters are used while we're at it.
 		bool validWord{ true };
-		for (int i = 0; i < length; ++i)
+		for (size_t i = 0; i < length; ++i)
 		{
 			validWord = validWord && isalpha(word[i]);
 			word[i] = tolower(word[i]);
@@ -190,7 +190,7 @@ int main()
 	// Clean up any used heap memory.
 	delete[] letters;
 
-	for (auto i = 0; i < wheelCount; ++i)
+	for (size_t i = 0; i < wheelCount; ++i)
 	{
 		delete[] wheels[i];
 	}
