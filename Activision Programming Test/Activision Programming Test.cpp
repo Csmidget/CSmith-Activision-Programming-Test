@@ -30,6 +30,7 @@ typedef unsigned int uint;
 // to an index from 0-25, indicating it's position in the alphabet.
 constexpr int alphabetindex(char letter) { return letter - 'a'; }
 
+// Attempts to find combinations that form a word on the lock.
 // This function could just return a bool and exit as soon as it finds a match
 // but to ensure any duplicate matches are found it continues until all possible
 // positions have been tested.
@@ -92,6 +93,7 @@ void ReadWheelFile(bool**& wheels, char*& letters, uint& wheelCount, uint& lette
 	// Move to the first wheel. ( '>>' does not move us to the next line after reading)
 	wheelFile.getline(letters, 1);
 
+	//Read in each wheel
 	for (size_t i = 0; i < wheelCount; i++)
 	{
 		wheelFile.getline(letters,lettersPerWheel + 1);
