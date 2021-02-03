@@ -18,7 +18,7 @@
 // If a word is shorter than the number of wheels it will shift along the lock and test again
 // until the last character of the word is aligned with the last wheel of the lock.
 //
-// I believe this solution has complexity ~O(n*m) where n is the word count and m is the wheel count.
+// I believe this solution has complexity ~O(n*log(m)) where n is the word count and m is the wheel count.
 // The number of letters on each wheel has no significant effect.
 
 #define ALPHABETLENGTH 26
